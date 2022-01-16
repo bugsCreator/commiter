@@ -3,6 +3,7 @@ import random
 import time
 from datetime import date
 import os
+import threading
 
 import random
 import time
@@ -30,7 +31,7 @@ def random_date(start, end, prop):
 
 
 def message():
-    date = f'Contribution: {random_date("1/1/2008 1:30 PM", "1/1/2021 4:50 AM", random.random()).replace("AM","").replace("PM","").replace(":","").replace("/","")}'
+    date = f'Contribution: {random_date("1/1/2008 1:30 PM", "1/1/2021 4:50 AM", random.random()).replace("AM", "").replace("PM", "").replace(":", "").replace("/", "")}'
     return date
 
 
@@ -65,6 +66,12 @@ def createCommit():
     # randomSleep()
 
 
+def start():
+    threading.Thread(target=createCommit).start()
+    threading.Thread(target=createCommit).start()
+
+
 if __name__ == '__main__':
-    for i in range(0, 100):
+    end = 100  # how much commits you need add half of it like if we need 200 we are passing 100
+    for i in range(0, end):
         createCommit()
